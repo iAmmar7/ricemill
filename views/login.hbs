@@ -1,0 +1,97 @@
+{{>header}}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/register.css" >
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Login</title>
+	
+</head>
+<body>
+	{{!-- <div class="mx-auto" style="width: 50%">
+		<div style="padding-top:70px">
+			{{#if validationErrors}}
+				{{#each validationErrors}}
+					<div class="alert alert-danger">
+						{{this.msg}}
+					</div>
+				{{/each}}
+			{{/if}}
+		</div>
+	</div> --}}
+
+	<div class="form-body">
+		<div class="form-structor">
+			<div class="signup slide-up">
+				<h2 class="form-title" id="signup" onclick="openSignup()"><span>or</span>Sign up</h2>
+			</div>
+			<div class="login">
+				<div class="center">
+					<h2 class="form-title" id="login"><span>or</span>Log in</h2>
+					<form method="POST" action= "/login">
+						<div class="form-holder">
+							<input type="text" class="input" name="username" id="username" placeholder="Username" required />
+							<input type="password" class="input" name="password" id="password" placeholder="Password" required />
+							<input type="checkbox" onclick="showPass()"><label>Show Password</label>
+						</div>
+						<button type="submit" class="submit-btn">Log in</button>
+					</form>
+					{{!-- <input type="checkbox" checked="checked"> Kzeep me login --}}
+					{{!-- <p class="new-here">New here? <span onclick="location.reload();location.href='register'">Create an account</span></p> --}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script>
+	function openSignup()
+	{
+		window.setTimeout("location.href='/register'",500);
+	}
+
+	function showPass() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+</script>
+
+
+<script>
+	console.clear();
+
+	const loginBtn = document.getElementById('login');
+	const signupBtn = document.getElementById('signup');
+
+	loginBtn.addEventListener('click', (e) => {
+		let parent = e.target.parentNode.parentNode;
+		Array.from(e.target.parentNode.parentNode.classList).find((element) => {
+			if(element !== "slide-up") {
+				parent.classList.add('slide-up')
+			}else{
+				signupBtn.parentNode.classList.add('slide-up')
+				parent.classList.remove('slide-up')
+			}
+		});
+	});
+
+	signupBtn.addEventListener('click', (e) => {
+		let parent = e.target.parentNode;
+		Array.from(e.target.parentNode.classList).find((element) => {
+			if(element !== "slide-up") {
+				parent.classList.add('slide-up')
+			}else{
+				loginBtn.parentNode.parentNode.classList.add('slide-up')
+				parent.classList.remove('slide-up')
+			}
+		});
+	});
+</script>
+
+
+{{>footer}}
+</body>
+</html>
